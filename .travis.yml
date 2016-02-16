@@ -3,6 +3,7 @@ node_js:
   - '5.5'
 before_install:
   - npm install -g jspm 
+  - jspm config registries.github.timeouts.lookup 300
   - jspm install
   - npm install -g gulp
 script: gulp
