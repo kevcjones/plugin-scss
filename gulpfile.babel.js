@@ -115,7 +115,7 @@ gulp.task('test:bundleStatic', ['jade', 'bundleStatic'], () => {
   gulp.watch('src/**.js').on('change', browserSync.reload);
 });
 
-gulp.task('default', ['lint', 'test', 'modernizr'], () => {
+gulp.task('default', ['lint', 'test'], () => {
   return gulp.src('.')
     .pipe(notify({
       message: 'Successfully build',

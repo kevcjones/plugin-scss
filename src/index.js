@@ -1,7 +1,6 @@
 /* global __moduleName */
 let fetch;
 let translate;
-let bundle;
 let styles = {};
 
 if (typeof window !== 'undefined') {
@@ -12,15 +11,20 @@ if (typeof window !== 'undefined') {
         return inject.default(load);
       })
       .then(function(css){
-        return styles = css
+        return styles = css;
       });
   };
   translate = function(load) {
       load.metadata.format = 'amd';
-      return new Promise(function(resolve, reject) {
-        var css = styles.trim().replace('\n', '');
-        var output = 'def' + 'ine(function() {\nreturn "' + css + '";\n});';
-        resolve(output);
+      return new Promise (function (resolve, reject) {
+        const css = styles.trim().replace('\n', '');
+        const output = 'def' + 'ine(function() {\nreturn "' + css + '";\n});';
+        if (!css){
+          reject('');
+        }
+        else {
+          resolve(output);
+        }
       });
   };
 
@@ -30,8 +34,8 @@ if (typeof window !== 'undefined') {
     return System.import('./sass-inject-build', { name: __moduleName })
       .then(function(builder) {return builder.default.call(System, load, opts);})
       .then(function(css){
-          //i'm not thrilled here but i cant see a way yet to pass between hooks
-          //since on bundle it appears to lose handle ALL the fetch in a single sitting
+          // i'm not thrilled here but i cant see a way yet to pass between hooks
+          // since on bundle it appears to lose handle ALL the fetch in a single sitting
           return styles[load.name] = css.replace(/\n$/, '');
       });
 
@@ -40,9 +44,14 @@ if (typeof window !== 'undefined') {
   translate = function(load) {
       load.metadata.format = 'amd';
       return new Promise(function(resolve, reject) {
-        var css = styles[load.name].trim().replace('\n', '');
-        var output = 'def' + 'ine(function() {\nreturn "' + css + '";\n});';
-        resolve(output);
+        const css = styles[load.name].trim().replace('\n', '');
+        const output = 'def' + 'ine(function() {\nreturn "' + css + '";\n});';
+        if (!css) {
+          reject('');
+        }
+        else {
+          resolve(output);
+        }
       });
   };
 }

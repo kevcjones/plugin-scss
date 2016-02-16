@@ -1,8 +1,6 @@
 import fs from 'fs';
 import sass from 'sass.js';
 import isEmpty from 'lodash/lang/isEmpty';
-import isString from 'lodash/lang/isString';
-import isUndefined from 'lodash/lang/isUndefined';
 import path from 'path';
 import resolvePath from './resolve-path';
 import escape from './escape-text';
@@ -30,7 +28,7 @@ const fromFileURL = url => {
 };
 
 // intercept file loading requests (@import directive) from libsass
-sass.importer( function(request, done){
+sass.importer(function(request, done){
   // Currently only supporting scss imports due to
   // https://github.com/sass/libsass/issues/1695
   let content;
@@ -82,15 +80,19 @@ export default function(loadObject){
 
   };
   return new Promise((resolve, reject) => {
-    var load = loadObject;
+    const load = loadObject;
     return loadFile(fromFileURL(load.address))
            .then(function(result){
              load.source = result;
              return compilePromise(load);
            })
            .then(function(res){
-             resolve(res);
-           })
+              if (!res){
+                reject('');
+              } else {
+                resolve(res);
+              }
+           });
 
   });
-};
+}
