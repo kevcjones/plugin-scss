@@ -1,7 +1,7 @@
 # plugin-scss
 
 [![Build Status](https://travis-ci.org/KevCJones/plugin-scss.svg?branch=master)](https://travis-ci.org/KevCJones/plugin-scss)
-[![Dependency Status](https://david-dm.org/KevCJones/plugin-scss.svg)](https://david-dm.org/KevCJones/plugin-scss)
+[![devDependency Status](https://david-dm.org/KevCJones/plugin-scss/dev-status.svg)](https://david-dm.org/KevCJones/plugin-scss#info=devDependencies)
 
 Originally forked from [plugin-sass](https://github.com/mobilexag/plugin-sass)
 
