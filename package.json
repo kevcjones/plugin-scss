@@ -1,7 +1,7 @@
 {
-  "name": "plugin-sass",
+  "name": "plugin-scss",
   "version": "0.2.5",
-  "description": "SystemJS SASS injector plugin that inlines the style requests, more flexible for angular 2 ",
+  "description": "SystemJS SCSS injector plugin that inlines the style requests, more flexible for angular 2 ",
   "registry": "jspm",
   "main": "index.js",
   "scripts": {
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KarlPurk/plugin-sass.git"
+    "url": "git+https://github.com/KevCJones/plugin-scss.git"
   },
   "author": "Kevin Jones <him@kevincjones.co.uk>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/KarlPurk/plugin-sass/issues"
+    "url": "https://github.com/KevCJones/plugin-scss/issues"
   },
-  "homepage": "https://github.com/KarlPurk/plugin-sass#readme",
+  "homepage": "https://github.com/KevCJones/plugin-scss#readme",
   "devDependencies": {
     "babel": "^5.8.23",
     "babel-core": "^5.8.25",
