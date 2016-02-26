@@ -2,9 +2,9 @@
 let fetch;
 let translate;
 
-fetch = function(load){ return ""; };
+fetch = function(){ return ''; };
 
-translate = function(load,opts) {
+translate = function(load) {
     load.metadata.format = 'amd';
 
     return System.import(this.builder ? './sass-inject-build' : './sass-inject', { name: __moduleName })
@@ -13,7 +13,7 @@ translate = function(load,opts) {
       })
       .then(function(css){
         const output = 'def' + 'ine(function() {\nreturn "' + css.trim().replace('\n', '') + '";\n});';
-        return (!!css) ? output : ''
+        return (!!css) ? output : '';
       });
 };
 
