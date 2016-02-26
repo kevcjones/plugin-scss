@@ -10,7 +10,7 @@ Originally forked from [plugin-sass](https://github.com/mobilexag/plugin-sass)
 [jspm](http://jspm.io) package manager.
 
 ```sh
-$ jspm install scss=github:KevCJones/plugin-scss
+$ jspm install scss
 ```
 
 Disclaimer : Learning experiment that has legs so shared it out.
