@@ -48,7 +48,7 @@ System.import('./style.sass!scss').then(function(css){
 
 ### Style
 
-By default, `plugin-scss` does NOT inject compiled css into a `<style>` tag in the `<head>`. It instead returns your css as a string. Use `plugin-sass` if you need this behaviour. I suspect you cannot have both installed though as they will target the same extension.
+By default, `plugin-scss` does NOT inject compiled css into a `<style>` tag in the `<head>`. It instead returns your css as a string. Use `plugin-sass` if you need this behaviour. 
 
 ### Strings for angular 2
 
@@ -106,14 +106,3 @@ $ gulp test:bundleStatic
 
 After that open [http://localhost:3000](http://localhost:3000) in the browser
 of your choice.
-
-## Typescript & JSPM 
-
-16.02.2016 : On adding to our own seed project we had the error message in our bundle creation.
-
-```sh
-Unable to load 'typescript'
-The incorrect instance of System is being used to System.import during builds.
-```
-
-The cause for us, typescript installed via JSPM was not working properly @1.7.5... so we changed to using it via NPM directly @1.7.5 (same version).. and it worked. Go figure, we're chalking this up to voodoo for now and waiting to see if it resolves later.
