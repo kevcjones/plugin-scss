@@ -15,9 +15,7 @@ Originally forked from [plugin-sass](https://github.com/mobilexag/plugin-sass)
 $ jspm install scss
 ```
 
-Disclaimer : Learning experiment that has legs so shared it out.
-
-We made the decision that it was unlikely that plugin-sass team would ever merge our changes back into the plugin-sass. They have a fundamental differece in use. Plugin-sass is cleaner if all you want to do is load your styles into the head block. However we had a very different use case. 
+The decision that it was unlikely that plugin-sass team would ever merge our changes back into the plugin-sass. They have a fundamental differece in use. Plugin-sass is cleaner if all you want to do is load your styles into the head block. However we had a very different use case. 
 
 We wanted to transpile our .scss content and return the css as a string so that we could inject it where ever we please. In particular, we wanted to inject into Angular 2's styles decorator. 
 
