@@ -14,11 +14,7 @@ translate = function(load) {
       .then(function(css){
         const output = 'def' + 'ine(function() {\nreturn "' + css.trim().replace('\n', '') + '";\n});';
         return (!!css) ? output : '';
-      },function(err){
-         console.warn("plugin-scss error : ");
-         console.error(err);
-         process.exit(1);
-      });
+      })
 };
 
 export { fetch, translate };

@@ -8,6 +8,7 @@ import url from 'url';
 import path from 'path';
 import resolvePath from './resolve-path';
 import escape from './escape-text';
+import log from './log';
 
 
 const importSass = new Promise((resolve, reject) => {
@@ -65,6 +66,8 @@ const compile = scss => {
         if (result.status === 0) {
           resolve(escape(result.text));
         } else {
+          log("warn","Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js");
+          log("error",result.formatted);
           reject(result.formatted);
         }
       });

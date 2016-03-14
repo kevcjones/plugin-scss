@@ -4,6 +4,7 @@ import isEmpty from 'lodash/lang/isEmpty';
 import path from 'path';
 import resolvePath from './resolve-path';
 import escape from './escape-text';
+import log from './log';
 
 const isWin = process.platform.match(/^win/);
 
@@ -73,6 +74,8 @@ export default function(loadObject){
         if (result.status === 0) {
           resolve(escape(result.text));
         } else {
+          log("warn","Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js",true);
+          log("error",result.formatted,true);
           reject(result.formatted);
         }
       });
