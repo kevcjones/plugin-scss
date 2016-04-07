@@ -1,5 +1,7 @@
 /* global Modernizr __moduleName */
 import './modernizr';
+import autoprefixer from 'autoprefixer';
+import postcss from 'postcss';
 import isEmpty from 'lodash/isEmpty';
 import isString from 'lodash/isString';
 import isUndefined from 'lodash/isUndefined';
@@ -55,7 +57,7 @@ importSass.then(sass => {
   sass.importer(sassImporter);
 });
 
-const compile = scss => {
+const compile = (scss,options) => {
   return new Promise((resolve, reject) => {
     importSass.then(sass => {
       const content = scss.content;
@@ -65,7 +67,15 @@ const compile = scss => {
       }
       sass.compile(content, scss.options, result => {
         if (result.status === 0) {
-          resolve(escape(result.text));
+            let text = result.text;
+            if(!isUndefined(System.sassPluginOptions)
+               && System.sassPluginOptions.autoprefixer){
+                   postcss([autoprefixer]).process(text).then(({ css }) => {
+              resolve(escape(css));
+          });}
+          else {
+              resolve(escape(text));
+            }
         } else {
           log("warn","Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js");
           log("error",result.formatted);

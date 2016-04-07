@@ -1,4 +1,6 @@
 import fs from 'fs';
+import autoprefixer from 'autoprefixer';
+import postcss from 'postcss';
 import sass from 'sass.js';
 import cloneDeep from 'lodash/cloneDeep';
 import isEmpty from 'lodash/isEmpty';
@@ -7,6 +9,7 @@ import path from 'path';
 import resolvePath from './resolve-path';
 import escape from './escape-text';
 import log from './log';
+
 
 const isWin = process.platform.match(/^win/);
 
@@ -78,11 +81,20 @@ export default function(loadObject){
       sass.compile(load.source, options, result => {
 
         if (result.status === 0) {
-          resolve(escape(result.text));
+            let text = result.text;
+            //credits : plugin-sass = screendriver + co - ty.
+            if (!isUndefined(System.sassPluginOptions) &&
+              System.sassPluginOptions.autoprefixer) {
+                postcss([autoprefixer]).process(text).then(({ css }) => {
+                  resolve(escape(css));
+                });
+            } else {
+              resolve(escape(text));
+            }
         } else {
-          log("warn","Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js",true);
-          log("error",result.formatted,true);
-          reject(result.formatted);
+            log("warn","Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js",true);
+            log("error",result.formatted,true);
+            reject(result.formatted);
         }
       });
     });
