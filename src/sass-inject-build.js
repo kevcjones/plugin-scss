@@ -1,10 +1,15 @@
 import fs from 'fs';
+import autoprefixer from 'autoprefixer';
+import postcss from 'postcss';
 import sass from 'sass.js';
-import isEmpty from 'lodash/lang/isEmpty';
+import cloneDeep from 'lodash/cloneDeep';
+import isEmpty from 'lodash/isEmpty';
+import isUndefined from 'lodash/isUndefined';
 import path from 'path';
 import resolvePath from './resolve-path';
 import escape from './escape-text';
 import log from './log';
+
 
 const isWin = process.platform.match(/^win/);
 
@@ -58,11 +63,15 @@ export default function(loadObject){
 
       const urlBase = `${path.dirname(load.address)}/`;
 
-      const options = {
-        style: sass.style.compressed,
-        indentedSyntax: load.address.endsWith('.sass'),
-        importer: { urlBase },
-      };
+      let options = {};
+
+      if (!isUndefined(System.sassPluginOptions) &&
+          !isUndefined(System.sassPluginOptions.sassOptions)) {
+        options = cloneDeep(System.sassPluginOptions.sassOptions);
+      }
+      options.style =  sass.style.compressed;
+      options.indentedSyntax =  load.address.endsWith('.sass');
+      options.importer = { urlBase };
 
       // Occurs on empty files
       if (isEmpty(load.source)) {
@@ -72,11 +81,20 @@ export default function(loadObject){
       sass.compile(load.source, options, result => {
 
         if (result.status === 0) {
-          resolve(escape(result.text));
+            let text = result.text;
+            //credits : plugin-sass = screendriver + co - ty.
+            if (!isUndefined(System.sassPluginOptions) &&
+              System.sassPluginOptions.autoprefixer) {
+                postcss([autoprefixer]).process(text).then(({ css }) => {
+                  resolve(escape(css));
+                });
+            } else {
+              resolve(escape(text));
+            }
         } else {
-          log("warn","Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js",true);
-          log("error",result.formatted,true);
-          reject(result.formatted);
+            log("warn","Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js",true);
+            log("error",result.formatted,true);
+            reject(result.formatted);
         }
       });
     });

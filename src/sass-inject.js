@@ -1,8 +1,11 @@
 /* global Modernizr __moduleName */
 import './modernizr';
-import isEmpty from 'lodash/lang/isEmpty';
-import isString from 'lodash/lang/isString';
-import isUndefined from 'lodash/lang/isUndefined';
+import autoprefixer from 'autoprefixer';
+import postcss from 'postcss';
+import isEmpty from 'lodash/isEmpty';
+import isString from 'lodash/isString';
+import isUndefined from 'lodash/isUndefined';
+import cloneDeep from 'lodash/cloneDeep';
 import reqwest from 'reqwest';
 import url from 'url';
 import path from 'path';
@@ -54,7 +57,7 @@ importSass.then(sass => {
   sass.importer(sassImporter);
 });
 
-const compile = scss => {
+const compile = (scss,options) => {
   return new Promise((resolve, reject) => {
     importSass.then(sass => {
       const content = scss.content;
@@ -64,7 +67,15 @@ const compile = scss => {
       }
       sass.compile(content, scss.options, result => {
         if (result.status === 0) {
-          resolve(escape(result.text));
+            let text = result.text;
+            if(!isUndefined(System.sassPluginOptions)
+               && System.sassPluginOptions.autoprefixer){
+                   postcss([autoprefixer]).process(text).then(({ css }) => {
+              resolve(escape(css));
+          });}
+          else {
+              resolve(escape(text));
+            }
         } else {
           log("warn","Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js");
           log("error",result.formatted);
@@ -78,16 +89,23 @@ const compile = scss => {
 export default load => {
   const urlBase = path.dirname(url.parse(load.address).pathname) + '/';
   const indentedSyntax = load.address.endsWith('.sass');
+
+  let options = {};
+
+  if (!isUndefined(System.sassPluginOptions) &&
+      !isUndefined(System.sassPluginOptions.sassOptions)) {
+    options = cloneDeep(System.sassPluginOptions.sassOptions);
+  }
+  options.indentedSyntax =  indentedSyntax;
+  options.importer = { urlBase };
+
   // load initial scss file
   return reqwest(load.address)
     // In Cordova Apps the response is the raw XMLHttpRequest
     .then(resp => {
       return {
         content: resp.responseText ? resp.responseText : resp,
-        options: {
-          indentedSyntax,
-          importer: { urlBase },
-        },
+        options: options,
       };
     })
     .then(compile);
