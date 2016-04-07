@@ -1,6 +1,6 @@
 {
   "name": "plugin-scss",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "SystemJS SCSS injector plugin that inlines the style requests, more flexible for angular 2 ",
   "registry": "jspm",
   "main": "index.js",
@@ -47,7 +47,8 @@
     },
     "dependencies": {
       "fs": "github:jspm/nodelibs-fs@^0.1.2",
-      "lodash": "npm:lodash@^3.10.1",
+      "lodash": "npm:lodash@^4.8.2",
+      "lodash.clonedeep": "npm:lodash.clonedeep@^4.3.2",
       "path": "github:jspm/nodelibs-path@^0.1.0",
       "reqwest": "github:ded/reqwest@^2.0.5",
       "sass.js": "npm:sass.js@^0.9.6",

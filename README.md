@@ -15,11 +15,11 @@ Originally forked from [plugin-sass](https://github.com/mobilexag/plugin-sass)
 $ jspm install scss
 ```
 
-The decision that it was unlikely that plugin-sass team would ever merge our changes back into the plugin-sass. They have a fundamental differece in use. Plugin-sass is cleaner if all you want to do is load your styles into the head block. However we had a very different use case. 
+The decision that it was unlikely that plugin-sass team would ever merge our changes back into the plugin-sass. They have a fundamental differece in use. Plugin-sass is cleaner if all you want to do is load your styles into the head block. However we had a very different use case.
 
-We wanted to transpile our .scss content and return the css as a string so that we could inject it where ever we please. In particular, we wanted to inject into Angular 2's styles decorator. 
+We wanted to transpile our .scss content and return the css as a string so that we could inject it where ever we please. In particular, we wanted to inject into Angular 2's styles decorator.
 
-Using it looks like this in its various forms : 
+Using it looks like this in its various forms :
 
 ```js
 System.import('./style.scss!').then(function(css){
@@ -48,7 +48,7 @@ System.import('./style.sass!scss').then(function(css){
 
 ### Style
 
-By default, `plugin-scss` does NOT inject compiled css into a `<style>` tag in the `<head>`. It instead returns your css as a string. Use `plugin-sass` if you need this behaviour. 
+By default, `plugin-scss` does NOT inject compiled css into a `<style>` tag in the `<head>`. It instead returns your css as a string. Use `plugin-sass` if you need this behaviour.
 
 ### Strings for angular 2
 
@@ -63,6 +63,19 @@ import styles from './style.scss!';
     styles: [styles]
 })
 ```
+
+### SASS options
+
+ To add SASS [options](https://github.com/medialize/sass.js/#using-the-sassjs-api)
+
+ ```js
+ sassPluginOptions: {
+   "sassOptions": {
+
+   }
+ }
+ ```
+
 
 ## Importing from jspm
 

@@ -1,8 +1,9 @@
 /* global Modernizr __moduleName */
 import './modernizr';
-import isEmpty from 'lodash/lang/isEmpty';
-import isString from 'lodash/lang/isString';
-import isUndefined from 'lodash/lang/isUndefined';
+import isEmpty from 'lodash/isEmpty';
+import isString from 'lodash/isString';
+import isUndefined from 'lodash/isUndefined';
+import cloneDeep from 'lodash/cloneDeep';
 import reqwest from 'reqwest';
 import url from 'url';
 import path from 'path';
@@ -78,16 +79,23 @@ const compile = scss => {
 export default load => {
   const urlBase = path.dirname(url.parse(load.address).pathname) + '/';
   const indentedSyntax = load.address.endsWith('.sass');
+
+  let options = {};
+
+  if (!isUndefined(System.sassPluginOptions) &&
+      !isUndefined(System.sassPluginOptions.sassOptions)) {
+    options = cloneDeep(System.sassPluginOptions.sassOptions);
+  }
+  options.indentedSyntax =  indentedSyntax;
+  options.importer = { urlBase };
+
   // load initial scss file
   return reqwest(load.address)
     // In Cordova Apps the response is the raw XMLHttpRequest
     .then(resp => {
       return {
         content: resp.responseText ? resp.responseText : resp,
-        options: {
-          indentedSyntax,
-          importer: { urlBase },
-        },
+        options: options,
       };
     })
     .then(compile);

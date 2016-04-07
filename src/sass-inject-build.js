@@ -1,6 +1,8 @@
 import fs from 'fs';
 import sass from 'sass.js';
-import isEmpty from 'lodash/lang/isEmpty';
+import cloneDeep from 'lodash/cloneDeep';
+import isEmpty from 'lodash/isEmpty';
+import isUndefined from 'lodash/isUndefined';
 import path from 'path';
 import resolvePath from './resolve-path';
 import escape from './escape-text';
@@ -58,11 +60,15 @@ export default function(loadObject){
 
       const urlBase = `${path.dirname(load.address)}/`;
 
-      const options = {
-        style: sass.style.compressed,
-        indentedSyntax: load.address.endsWith('.sass'),
-        importer: { urlBase },
-      };
+      let options = {};
+
+      if (!isUndefined(System.sassPluginOptions) &&
+          !isUndefined(System.sassPluginOptions.sassOptions)) {
+        options = cloneDeep(System.sassPluginOptions.sassOptions);
+      }
+      options.style =  sass.style.compressed;
+      options.indentedSyntax =  load.address.endsWith('.sass');
+      options.importer = { urlBase };
 
       // Occurs on empty files
       if (isEmpty(load.source)) {

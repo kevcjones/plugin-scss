@@ -13,6 +13,12 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+  sassPluginOptions: {
+    "autoprefixer": true,
+    "sassOptions": {
+      "comments": true
+    }
+  },
 
   map: {
     "babel": "npm:babel-core@5.8.25",
@@ -20,7 +26,8 @@ System.config({
     "bootstrap": "github:twbs/bootstrap-sass@3.3.6",
     "core-js": "npm:core-js@1.2.0",
     "fs": "github:jspm/nodelibs-fs@0.1.2",
-    "lodash": "npm:lodash@3.10.1",
+    "lodash": "npm:lodash@4.8.2",
+    "lodash.clonedeep": "npm:lodash.clonedeep@4.3.2",
     "path": "github:jspm/nodelibs-path@0.1.0",
     "reqwest": "github:ded/reqwest@2.0.5",
     "sass.js": "npm:sass.js@0.9.6",
@@ -220,7 +227,14 @@ System.config({
     "npm:isarray@1.0.0": {
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
-    "npm:lodash@3.10.1": {
+    "npm:lodash._baseclone@4.5.4": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0"
+    },
+    "npm:lodash.clonedeep@4.3.2": {
+      "lodash._baseclone": "npm:lodash._baseclone@4.5.4"
+    },
+    "npm:lodash@4.8.2": {
+      "buffer": "github:jspm/nodelibs-buffer@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:miller-rabin@4.0.0": {
