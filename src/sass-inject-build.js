@@ -16,7 +16,7 @@ const loadFile = function(file) {
 
     return new Promise((resolve, reject) => {
         fs.readFile(file, {
-            encoding: 'UTF-8'
+            encoding: 'UTF-8',
         }, (err, data) => {
             if (err) {
                 reject(err);
@@ -53,7 +53,7 @@ sass.importer(function(request, done) {
         .then(data => content = data)
         .then(() => done({
             content,
-            path: resolved
+            path: resolved,
         }))
         .catch(() => done());
 });
@@ -75,7 +75,7 @@ export default function(loadObject) {
             options.style = sass.style.compressed;
             options.indentedSyntax = load.address.endsWith('.sass');
             options.importer = {
-                urlBase
+                urlBase,
             };
 
             // Occurs on empty files
@@ -86,21 +86,21 @@ export default function(loadObject) {
             sass.compile(load.source, options, result => {
 
                 if (result.status === 0) {
-                    let text = result.text;
-                    //credits : plugin-sass = screendriver + co - ty.
+                    const text = result.text;
+                    // credit : plugin-sass = screendriver + co - ty.
                     if (!isUndefined(System.sassPluginOptions) &&
                         System.sassPluginOptions.autoprefixer) {
                         postcss([autoprefixer])
                             .process(text)
-                            .then(({css}) => {
+                            .then(({ css }) => {
                                 resolve(escape(css));
                             });
                     } else {
                         resolve(escape(text));
                     }
                 } else {
-                    log("warn", "Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js", true);
-                    log("error", result.formatted, true);
+                    log('warn', 'Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js', true);
+                    log('error', result.formatted, true);
                     reject(result.formatted);
                 }
             });

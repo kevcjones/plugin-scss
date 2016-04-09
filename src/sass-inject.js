@@ -50,7 +50,7 @@ const sassImporter = (request, done) => {
         })
         .then(() => done({
             content,
-            path: resolved
+            path: resolved,
         }))
         .catch(() => done());
 };
@@ -60,7 +60,7 @@ importSass.then(sass => {
     sass.importer(sassImporter);
 });
 
-const compile = (scss, options) => {
+const compile = scss => {
     return new Promise((resolve, reject) => {
         importSass.then(sass => {
             const content = scss.content;
@@ -70,11 +70,11 @@ const compile = (scss, options) => {
             }
             sass.compile(content, scss.options, result => {
                 if (result.status === 0) {
-                    let text = result.text;
+                    const text = result.text;
                     if (!isUndefined(System.sassPluginOptions)
                         && System.sassPluginOptions.autoprefixer) {
                             postcss([autoprefixer]).process(text).then(({
-                                css
+                                css,
                             }) => {
                                 resolve(escape(css));
                             });
@@ -82,8 +82,8 @@ const compile = (scss, options) => {
                         resolve(escape(text));
                     }
                 } else {
-                    log("warn", "Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js");
-                    log("error", result.formatted);
+                    log('warn', 'Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js');
+                    log('error', result.formatted);
                     reject(result.formatted);
                 }
             });
@@ -103,7 +103,7 @@ export default load => {
     }
     options.indentedSyntax = indentedSyntax;
     options.importer = {
-        urlBase
+        urlBase,
     };
 
     // load initial scss file
@@ -112,7 +112,7 @@ export default load => {
         .then(resp => {
             return {
                 content: resp.responseText ? resp.responseText : resp,
-                options: options,
+                options,
             };
         })
         .then(compile);

@@ -1,12 +1,12 @@
-const log = function log(level, msg, isTerminal) {
+const log = function log(level, msg, _isTerminal) {
 
-    var prefix = "[plugin-scss]";
-    isTerminal = isTerminal || false;
+    const prefix = '[plugin-scss]';
+    const isTerminal = _isTerminal || false;
     if (!isTerminal) {
         console.log(prefix, msg);
     } else {
-        //set the color of message based on level
-        var msgColor = '\x1b[0m'; // 0 = terminal
+        // set the color of message based on level
+        let msgColor = '\x1b[0m'; // 0 = terminal
         switch (level) {
             case 'info':
                 msgColor = '\x1b[36m';
@@ -17,11 +17,13 @@ const log = function log(level, msg, isTerminal) {
             case 'error':
                 msgColor = '\x1b[31m';
                 break;
+            default:
+                msgColor = '\x1b[36m';
+                break;
         }
 
         console.log('\x1b[36m', prefix, msgColor, msg, '\x1b[0m');
     }
-}
-
+};
 
 export default log;
