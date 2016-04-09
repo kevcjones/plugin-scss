@@ -10,7 +10,8 @@
 		"space-before-function-paren":0,
 		"no-return-assign":0,
 		"indent":0,
-		"brace-style":0
+		"brace-style":0,
+        "no-console":0
 
 	}
 }
