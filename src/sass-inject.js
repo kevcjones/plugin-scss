@@ -70,16 +70,15 @@ const compile = scss => {
             }
             sass.compile(content, scss.options, result => {
                 if (result.status === 0) {
-                    const text = result.text;
                     if (!isUndefined(System.sassPluginOptions)
                         && System.sassPluginOptions.autoprefixer) {
-                            postcss([autoprefixer]).process(text).then(({
+                            postcss([autoprefixer]).process(result.text).then(({
                                 css,
                             }) => {
                                 resolve(escape(css));
                             });
                     } else {
-                        resolve(escape(text));
+                        resolve(escape(result.text));
                     }
                 } else {
                     log('warn', 'Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js');
