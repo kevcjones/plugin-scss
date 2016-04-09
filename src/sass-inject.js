@@ -72,6 +72,11 @@ const compile = scss => {
                 if (result.status === 0) {
                     if (!isUndefined(System.sassPluginOptions)
                         && System.sassPluginOptions.autoprefixer) {
+                            if(!result.text) {
+                                log('error', System.meta.load_address+' did not parse!');
+                                resolve(escape(' '));
+                                return;
+                            }
                             postcss([autoprefixer]).process(result.text).then(({
                                 css,
                             }) => {
@@ -109,6 +114,8 @@ export default load => {
     return reqwest(load.address)
         // In Cordova Apps the response is the raw XMLHttpRequest
         .then(resp => {
+            //we want this in case there is a problem in compile
+            System.meta.load_address = load.address;
             return {
                 content: resp.responseText ? resp.responseText : resp,
                 options,
