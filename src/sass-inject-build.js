@@ -86,17 +86,16 @@ export default function(loadObject) {
             sass.compile(load.source, options, result => {
 
                 if (result.status === 0) {
-                    const text = result.text;
                     // credit : plugin-sass = screendriver + co - ty.
                     if (!isUndefined(System.sassPluginOptions) &&
                         System.sassPluginOptions.autoprefixer) {
                         postcss([autoprefixer])
-                            .process(text)
+                            .process(result.text)
                             .then(({ css }) => {
                                 resolve(escape(css));
                             });
                     } else {
-                        resolve(escape(text));
+                        resolve(escape(result.text));
                     }
                 } else {
                     log('warn', 'Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js', true);
