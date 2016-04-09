@@ -63,12 +63,12 @@ importSass.then(sass => {
 const compile = scss => {
     return new Promise((resolve, reject) => {
         importSass.then(sass => {
-            const content = scss.content;
-            if (isString(content) && isEmpty(content) ||
-                !isUndefined(content.responseText) && isEmpty(content.responseText)) {
+
+            if (isString(scss.content) && isEmpty(scss.content) ||
+                !isUndefined(scss.content.responseText) && isEmpty(scss.content.responseText)) {
                     return resolve('');
             }
-            sass.compile(content, scss.options, result => {
+            sass.compile(scss.content, scss.options, result => {
                 if (result.status === 0) {
                     if (!isUndefined(System.sassPluginOptions)
                         && System.sassPluginOptions.autoprefixer) {
