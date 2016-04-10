@@ -28,7 +28,7 @@ const loadFile = function(file) {
 };
 
 const fromFileURL = url => {
-    const address = url.replace(/^file:(\/+)?/i, '');
+    const address = decodeURIComponent(url.replace(/^file:(\/+)?/i, ''));
     return !isWin ? `/${address}` : address.replace(/\//g, '\\');
 };
 
