@@ -14,7 +14,7 @@ import tapColorize from 'tap-colorize';
 const browserSync = browserSyncModule.create();
 const bundle = (buildStatic = false) => {
   const copyFiles = new Promise((resolve, reject) => {
-    fse.copy('src/config.js', '.tmp/config.js', err => {
+    fse.copy('src/jspm.config.js', '.tmp/jspm.config.js', err => {
       if (err) {
         reject(err);
       } else {
@@ -28,8 +28,8 @@ const bundle = (buildStatic = false) => {
       }
     });
   });
-  const builder = new Builder('src', 'src/config.js');
-  const build = builder[buildStatic ? 'buildStatic' : 'bundle']('test/bundleme', '.tmp/bundle.js');
+  const builder = new Builder('src', 'src/jspm.config.js');
+  const build = builder[buildStatic ? 'buildStatic' : 'bundle']('test/bundleme.js', '.tmp/bundle.js');
   return Promise.all([build, copyFiles]);
 };
 
@@ -53,7 +53,7 @@ gulp.task('bundleStatic', ['clean'], () => {
 
 gulp.task('lint', () => {
   const glob = [
-    '!src/config.js',
+    '!src/jspm.config.js',
     '!src/modernizr.js',
     '!src/jspm_packages/**',
     'src/**/*.js',
@@ -67,7 +67,7 @@ gulp.task('lint', () => {
 
 gulp.task('modernizr', () => {
   const glob = [
-    '!src/config.js',
+    '!src/jspm.config.js',
     '!src/modernizr.js',
     '!src/jspm_packages/**',
     'src/**/*.js',

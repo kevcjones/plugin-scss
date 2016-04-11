@@ -6,9 +6,9 @@ import cloneDeep from 'lodash/cloneDeep';
 import isEmpty from 'lodash/isEmpty';
 import isUndefined from 'lodash/isUndefined';
 import path from 'path';
-import resolvePath from './resolve-path';
-import escape from './escape-text';
-import log from './log';
+import resolvePath from './resolve-path.js';
+import escape from './escape-text.js';
+import log from './log.js';
 
 const isWin = process.platform.match(/^win/);
 

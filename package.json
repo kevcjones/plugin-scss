@@ -34,7 +34,7 @@
     "gulp-notify": "^2.2.0",
     "gulp-tape": "0.0.7",
     "gulp-uglify": "^1.4.2",
-    "jspm": "^0.16.32",
+    "jspm": "^0.17.0-beta.12",
     "systemjs-builder": "^0.15.14",
     "tap-colorize": "^1.2.0",
     "tape": "^4.4.0"
@@ -47,19 +47,71 @@
     },
     "dependencies": {
       "autoprefixer": "npm:autoprefixer@^6.3.6",
-      "fs": "github:jspm/nodelibs-fs@^0.1.2",
-      "lodash": "npm:lodash@^4.8.2",
-      "path": "github:jspm/nodelibs-path@^0.1.0",
+      "lodash": "npm:lodash@^4.9.0",
+      "plugin-babel": "npm:systemjs-plugin-babel@^0.0.9",
       "postcss": "npm:postcss@^5.0.19",
       "reqwest": "github:ded/reqwest@^2.0.5",
       "sass.js": "npm:sass.js@^0.9.6",
-      "url": "github:jspm/nodelibs-url@^0.1.0"
+      "systemjs-builder": "npm:systemjs-builder@^0.15.14"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@^5.8.24",
       "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "bootstrap": "github:twbs/bootstrap-sass@^3.3.6",
-      "core-js": "npm:core-js@^1.1.4"
+      "bootstrap": "github:twbs/bootstrap-sass@^3.3.6"
+    },
+    "peerDependencies": {
+      "assert": "github:jspm/nodelibs-assert@^0.2.0-alpha",
+      "buffer": "github:jspm/nodelibs-buffer@^0.2.0-alpha",
+      "child_process": "github:jspm/nodelibs-child_process@^0.2.0-alpha",
+      "constants": "github:jspm/nodelibs-constants@^0.2.0-alpha",
+      "core-js": "npm:core-js@^1.1.4",
+      "crypto": "github:jspm/nodelibs-crypto@^0.2.0-alpha",
+      "events": "github:jspm/nodelibs-events@^0.2.0-alpha",
+      "fs": "github:jspm/nodelibs-fs@^0.2.0-alpha",
+      "http": "github:jspm/nodelibs-http@^0.2.0-alpha",
+      "module": "github:jspm/nodelibs-module@^0.2.0-alpha",
+      "net": "github:jspm/nodelibs-net@^0.2.0-alpha",
+      "path": "github:jspm/nodelibs-path@^0.2.0-alpha",
+      "process": "github:jspm/nodelibs-process@^0.2.0-alpha",
+      "stream": "github:jspm/nodelibs-stream@^0.2.0-alpha",
+      "string_decoder": "github:jspm/nodelibs-string_decoder@^0.2.0-alpha",
+      "tty": "github:jspm/nodelibs-tty@^0.2.0-alpha",
+      "url": "github:jspm/nodelibs-url@^0.2.0-alpha",
+      "util": "github:jspm/nodelibs-util@^0.2.0-alpha",
+      "vm": "github:jspm/nodelibs-vm@^0.2.0-alpha"
+    },
+    "overrides": {
+      "npm:babel-runtime@5.8.25": {
+        "main": false,
+        "dependencies": {},
+        "optionalDependencies": {
+          "core-js": "^1.2.0"
+        }
+      },
+      "npm:bluebird@3.3.4": {
+        "meta": {
+          "js/browser/bluebird.js": {
+            "format": "global"
+          },
+          "js/browser/bluebird.min.js": {
+            "format": "global"
+          }
+        }
+      },
+      "npm:inherits@2.0.1": {
+        "ignore": [
+          "test.js"
+        ]
+      },
+      "npm:sass.js@0.9.6": {
+        "map": {
+          "ws": "@empty"
+        },
+        "meta": {
+          "dist/sass.worker.js": {
+            "format": "global"
+          }
+        }
+      }
     }
   }
 }

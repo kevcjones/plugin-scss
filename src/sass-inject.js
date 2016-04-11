@@ -1,5 +1,5 @@
 /* global Modernizr __moduleName */
-import './modernizr';
+import './modernizr.js';
 import autoprefixer from 'autoprefixer';
 import postcss from 'postcss';
 import isEmpty from 'lodash/isEmpty';
@@ -9,9 +9,9 @@ import cloneDeep from 'lodash/cloneDeep';
 import reqwest from 'reqwest';
 import url from 'url';
 import path from 'path';
-import resolvePath from './resolve-path';
-import escape from './escape-text';
-import log from './log';
+import resolvePath from './resolve-path.js';
+import escape from './escape-text.js';
+import log from './log.js';
 
 
 const importSass = new Promise((resolve, reject) => {
