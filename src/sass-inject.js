@@ -96,7 +96,10 @@ const compile = scss => {
 };
 
 export default load => {
-    const urlBase = path.dirname(url.parse(load.address).pathname) + '/';
+    const urlParsed = url.parse(load.address);
+    const urlBaseProtocolAndHost = urlParsed.protocol + '//' + urlParsed.host;
+    const urlBaseFolder = path.dirname(urlParsed.pathname) + '/';
+    const urlBase = urlBaseProtocolAndHost + urlBaseFolder;
     const indentedSyntax = load.address.endsWith('.sass');
 
     let options = {};
