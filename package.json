@@ -1,6 +1,6 @@
 {
   "name": "plugin-scss",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "SystemJS SCSS injector plugin that inlines the style requests, more flexible for angular 2 ",
   "registry": "jspm",
   "main": "index.js",
