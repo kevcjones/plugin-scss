@@ -67,8 +67,8 @@ export default function(loadObject) {
 
             let options = {};
 
-            if (!isUndefined(System.sassPluginOptions) &&
-                !isUndefined(System.sassPluginOptions.sassOptions)) {
+            if (!isUndefined(System.sassPluginOptions)
+                && !isUndefined(System.sassPluginOptions.sassOptions)) {
                 options = cloneDeep(System.sassPluginOptions.sassOptions);
             }
 
@@ -87,8 +87,8 @@ export default function(loadObject) {
 
                 if (result.status === 0) {
                     // credit : plugin-sass = screendriver + co - ty.
-                    if (!isUndefined(System.sassPluginOptions) &&
-                        System.sassPluginOptions.autoprefixer) {
+                    if (!isUndefined(System.sassPluginOptions)
+                        && System.sassPluginOptions.autoprefixer) {
                         postcss([autoprefixer])
                             .process(result.text)
                             .then(({ css }) => {

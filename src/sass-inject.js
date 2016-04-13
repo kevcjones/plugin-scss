@@ -66,8 +66,9 @@ const compile = scss => {
     return new Promise((resolve, reject) => {
         importSass.then(sass => {
 
-            if (isString(scss.content) && isEmpty(scss.content) ||
-                !isUndefined(scss.content.responseText) && isEmpty(scss.content.responseText)) {
+            if (isString(scss.content) && isEmpty(scss.content)
+                || !isUndefined(scss.content.responseText)
+                && isEmpty(scss.content.responseText)) {
                     return resolve('');
             }
             sass.compile(scss.content, scss.options, result => {
@@ -75,7 +76,7 @@ const compile = scss => {
                     if (!isUndefined(System.sassPluginOptions)
                         && System.sassPluginOptions.autoprefixer) {
                             if (!result.text) {
-                                log('error', System.meta.load_address + ' did not parse!');
+                                log('error', System.meta.loadAddress + ' did not parse!');
                                 resolve(escape(' '));
                                 return;
                             }
@@ -106,8 +107,8 @@ export default load => {
 
     let options = {};
 
-    if (!isUndefined(System.sassPluginOptions) &&
-        !isUndefined(System.sassPluginOptions.sassOptions)) {
+    if (!isUndefined(System.sassPluginOptions)
+        && !isUndefined(System.sassPluginOptions.sassOptions)) {
         options = cloneDeep(System.sassPluginOptions.sassOptions);
     }
     options.indentedSyntax = indentedSyntax;
@@ -120,7 +121,7 @@ export default load => {
         // In Cordova Apps the response is the raw XMLHttpRequest
         .then(resp => {
             // we want this in case there is a problem in compile
-            System.meta.load_address = load.address;
+            System.meta.loadAddress = load.address;
             return {
                 content: resp.responseText ? resp.responseText : resp,
                 options,
