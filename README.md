@@ -1,7 +1,7 @@
 # plugin-scss
 
-[![Build Status](https://api.travis-ci.org/KevCJones/plugin-scss.svg?branch=v0.2.9)](https://travis-ci.org/KevCJones/plugin-scss)
-<!-- [![devDependency Status](https://david-dm.org/KevCJones/plugin-scss/dev-status.svg)](https://david-dm.org/KevCJones/plugin-scss#info=devDependencies) -->
+[![Build Status](https://api.travis-ci.org/KevCJones/plugin-scss.svg?branch=master)](https://travis-ci.org/KevCJones/plugin-scss)
+[![devDependency Status](https://david-dm.org/KevCJones/plugin-scss/dev-status.svg)](https://david-dm.org/KevCJones/plugin-scss#info=devDependencies)
 
 ![At a Glance](assets/img/ataglance.jpg)
 
