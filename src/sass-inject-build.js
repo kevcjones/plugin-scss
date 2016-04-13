@@ -43,9 +43,7 @@ sass.importer(function(request, done) {
     resolvePath(request)
         .then(importUrl => {
             resolved = importUrl;
-            const partialUrl = importUrl.replace(/\/([^/]*)$/, '/_$1')
-                                        // todo - remove this fix when https://github.com/medialize/sass.js/issues/51 resolves
-                                        .replace(/.s(c|a)ss.s(c|a)ss/, '.s$2ss');
+            const partialUrl = importUrl.replace(/\/([^/]*)$/, '/_$1');
             readImportPath = fromFileURL(importUrl);
             readPartialPath = fromFileURL(partialUrl);
             return loadFile(readPartialPath);
