@@ -7,7 +7,11 @@ test('translate', assert => {
     .then((module) => {
         assert.equal(typeof module.default, 'string', 'exports css string as a default');
     })
-    .catch(e => { assert.fail(e) })
-    .then(() => { assert.end() });
+    .catch(e => {
+        assert.fail(e);
+    })
+    .then(() => {
+        assert.end();
+    });
 
 });
