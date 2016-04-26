@@ -19,7 +19,7 @@ translate = function(load) {
                 const output = 'def' + 'ine(function() {\nreturn "' + css.trim().replace('\n', '') + '";\n});';
                 return (!!css) ? output : '';
             }
-  
+
             load.metadata.format = 'esm';
             return 'export default "' + css.trim().replace('\n', '') + '"';
         });

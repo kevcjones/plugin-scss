@@ -6,7 +6,8 @@ System.config({
     "optional": [
       "runtime",
       "optimisation.modules.system"
-    ]
+    ],
+    "compact" : false
   },
   paths: {
     "test/*": "./test/*",
