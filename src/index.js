@@ -14,9 +14,14 @@ translate = function(load) {
             return inject.default(load);
         })
         .then(function(css) {
-            load.metadata.format = 'amd';
-            const output = 'def' + 'ine(function() {\nreturn "' + css.trim().replace('\n', '') + '";\n});';
-            return (!!css) ? output : '';
+            if (System.transpiler === false) {
+                load.metadata.format = 'amd';
+                const output = 'def' + 'ine(function() {\nreturn "' + css.trim().replace('\n', '') + '";\n});';
+                return (!!css) ? output : '';
+            }
+
+            load.metadata.format = 'esm';
+            return 'export default "' + css.trim().replace('\n', '') + '"';
         });
 };
 
