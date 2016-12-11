@@ -1,4 +1,7 @@
 const escapeText = source => {
+    if (!source) {
+        return '';
+    }
     return source
         .replace(/(["\\])/g, '\\$1')
         .replace(/[\f]/g, '\\f')
