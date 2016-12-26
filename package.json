@@ -38,11 +38,7 @@
     "tap-colorize": "^1.2.0",
     "tape": "^4.4.0"
   },
-  "peerDependencies": {
-    "autoprefixer": "^6.6.0"
-  },
   "dependencies": {
-    "autoprefixer": "^6.6.0"
   },
   "jspm": {
     "directories": {
