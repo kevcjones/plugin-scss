@@ -119,7 +119,7 @@ export default load => {
         // In Cordova Apps the response is the raw XMLHttpRequest
         .then(resp => {
             // we want this in case there is a problem in compile
-            System.meta.loadAddress = load.address;
+            SystemJS.config({ meta: { "loadAddress": load.address } });
             return {
                 content: resp.responseText ? resp.responseText : resp,
                 options,
