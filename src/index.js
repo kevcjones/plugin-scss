@@ -7,9 +7,7 @@ fetch = function() {
 };
 
 translate = function(load) {
-    return System.import(typeof window !== 'undefined' ? './sass-inject' : './sass-inject-build', {
-            name: __moduleName,
-        })
+    return System.import(typeof window !== 'undefined' ? './sass-inject' : './sass-inject-build', __moduleName)
         .then(function(inject) {
             return inject.default(load);
         })
