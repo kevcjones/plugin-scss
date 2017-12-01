@@ -99,8 +99,12 @@ export default function(loadObject) {
                     }
                 } else {
                     log('warn', 'Stacklite :: github:KevCJones/plugin-scss/sass-inject-build.js -> npm:sass.js', true);
-                    log('error', result.formatted, true);
-                    reject(result.formatted);
+
+                    // log error when formatted property is undefined
+                    var message = result.formatted ? result.formatted : result.error;
+
+                    log('error', message, true);
+                    reject(message);
                 }
             });
         });
