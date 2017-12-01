@@ -12,8 +12,10 @@ const resolvePath = (request) => {
             if (!current.match(/\.s(c|a)ss/))
                 current += '.scss';
             System.normalize(current)
-                .then(file => resolve(file.replace(/\.js$|\.ts$/, '')))
-                .catch(e => reject(e));
+                .then(file => {
+                  resolve(file.replace(/\.js$|\.ts$/, ''));
+                })
+                .catch(e => { reject(e); });
         } else {
             const prevBase = path.dirname(previous) + '/';
             const base = (previous === 'stdin') ? request.options.urlBase : paths[previous] || prevBase;
@@ -22,7 +24,7 @@ const resolvePath = (request) => {
             if (!resolved.match(/\.s(c|a)ss/))
                 resolved += '.scss';
 
-            resolve(`${resolved}`);
+            resolve(resolved);
         }
     });
 };

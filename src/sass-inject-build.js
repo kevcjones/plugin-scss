@@ -29,7 +29,7 @@ const loadFile = function(file) {
 
 const fromFileURL = url => {
     const address = decodeURIComponent(url.replace(/^file:(\/+)?/i, ''));
-    return !isWin ? `/${address}` : address.replace(/\//g, '\\');
+    return !isWin ? '/' + address : address.replace(/\//g, '\\');
 };
 
 // intercept file loading requests (@import directive) from libsass
@@ -48,14 +48,16 @@ sass.importer(function(request, done) {
             readPartialPath = fromFileURL(partialUrl);
             return loadFile(readPartialPath);
         })
-        .then(data => content = data)
-        .catch(() => loadFile(readImportPath))
-        .then(data => content = data)
-        .then(() => done({
+        .then(data => { content = data; })
+        .catch(() => { loadFile(readImportPath); })
+        .then(data => { content = data; })
+        .then(() => {
+          done({
             content,
             path: resolved,
-        }))
-        .catch(() => done());
+          });
+        })
+        .catch(() => { done(); });
 });
 
 export default function(loadObject) {
@@ -63,7 +65,7 @@ export default function(loadObject) {
 
         return new Promise((resolve, reject) => {
 
-            const urlBase = `${path.dirname(load.address)}/`;
+            const urlBase = path.dirname(load.address) + '/';
 
             let options = {};
 
