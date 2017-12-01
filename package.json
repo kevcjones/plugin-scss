@@ -38,7 +38,8 @@
     "tap-colorize": "^1.2.0",
     "tape": "^4.4.0"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "jspm": {
     "directories": {
       "baseURL": "src",
